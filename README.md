@@ -78,17 +78,44 @@ Command (abstract base)
 - **`StreamManager`** — Provides a uniform `std::istream&` / `std::ostream&` interface regardless of whether the underlying source is stdin/stdout, a file, or an in-memory string. Manages ownership and cleanup of heap-allocated streams.
 - **`PipelineExecutor`** — Chains commands by capturing each command's output in a `std::stringstream` and feeding it as the next command's input.
 
+## Project Structure
+
+```
+cpp-command-line-interpreter/
+├── README.md
+├── .gitignore
+├── include/          # Header files
+│   ├── Command.h
+│   ├── CommandFactory.h
+│   ├── CommandLineInterpreter.h
+│   ├── ErrorHandler.h
+│   ├── InterpreterException.h
+│   ├── Lexer.h
+│   ├── Parser.h
+│   ├── PipelineExecutor.h
+│   ├── StreamManager.h
+│   ├── SystemContext.h
+│   ├── Types.h
+│   └── ...           # All command headers
+└── src/              # Source files
+    ├── main.cpp
+    ├── Command.cpp
+    ├── CommandFactory.cpp
+    ├── CommandLineInterpreter.cpp
+    ├── Lexer.cpp
+    ├── Parser.cpp
+    ├── PipelineExecutor.cpp
+    ├── StreamManager.cpp
+    ├── ErrorHandler.cpp
+    └── ...           # All command implementations
+```
+
 ## Build and Run
 
 Compile and run using a standard C++17 compiler:
 
 ```bash
-g++ -std=c++17 -o cli main.cpp CommandLineInterpreter.cpp CommandFactory.cpp Command.cpp \
-    Lexer.cpp Parser.cpp PipelineExecutor.cpp StreamManager.cpp ErrorHandler.cpp \
-    EchoCommand.cpp WcCommand.cpp TrCommand.cpp HeadCommand.cpp TailCommand.cpp \
-    TimeCommand.cpp DateCommand.cpp TouchCommand.cpp TruncateCommand.cpp RmCommand.cpp \
-    CopyCommand.cpp BatchCommand.cpp GrepCommand.cpp DiffCommand.cpp SortCommand.cpp \
-    CatCommand.cpp FindCommand.cpp HistoryCommand.cpp LastCommand.cpp CountCommand.cpp
+g++ -std=c++17 -Iinclude -o cli src/*.cpp
 ./cli
 ```
 
