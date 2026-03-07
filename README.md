@@ -160,8 +160,3 @@ This project was developed as part of the Object-Oriented Programming course (20
 ## License
 
 This project is licensed under the MIT License.
-
-## Author
-
-Magdalena Savić
-Faculty of Electrical Engineering, University of Belgrade
